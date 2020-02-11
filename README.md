@@ -1,3 +1,26 @@
+prerequisits
+
+* mysql latest
+* php 7.2
+* composer
+* apache
+
+hosting steps
+
+* create database in mysql
+* checkout the project code
+* cd checkout folder
+* configure the db credentials in .env file
+* fire composer install
+* create softlink 
+ln -s /var/www/html/admin_panel/storage/app/public /var/www/html/admin_panel/public/storage
+* php artisan migrate
+* php artisan db:seed
+* php artisan serve
+* play with system
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
