@@ -12,7 +12,7 @@ class CreateEmployeesTable extends Migration {
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone', 15)->nullable();
             $table->bigInteger('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->softDeletes();
