@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
+use App\Company;
 
 class BasicTest extends TestCase {
 
@@ -38,7 +39,7 @@ class BasicTest extends TestCase {
 //        $user = factory(User::class)->create([
 //            'password' => bcrypt($password = 'i-love-laravel'),
 //        ]);
-        $user = User::find(1);
+        $user = User::where('email', 'admin@admin.com')->get()[0];
         $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
@@ -49,8 +50,7 @@ class BasicTest extends TestCase {
     }
 
     public function testLoginWithInvalidCredential() {
-        $user = User::find(1);
-
+        $user = User::where('email', 'admin@admin.com')->get()[0];
         $response = $this->from('/login')->post('/login', [
             'email' => $user->email,
             'password' => 'invalid-password',
@@ -61,6 +61,44 @@ class BasicTest extends TestCase {
         $this->assertTrue(session()->hasOldInput('email'));
         $this->assertFalse(session()->hasOldInput('password'));
         $this->assertGuest();
+    }
+
+    public function testCreateCompany() {
+        $company = [
+            'name' => 'Joe Fransisco',
+        ];
+
+        // create session first
+        $user = User::where('email', 'admin@admin.com')->get()[0];
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $response = $this->post('/home', $company);
+
+        $response->assertRedirect('/home')
+                ->assertSessionHas('status', __('message.company_saved'));
+
+        $this->assertDatabaseHas('companies', $company);
+    }
+
+    public function testCreateExistingCompany() {
+        $company = [
+            'name' => 'Joe Fransisco',
+        ];
+
+        // create session first
+        $user = User::where('email', 'admin@admin.com')->get()[0];
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $response = $this->post('/home', $company);
+
+        $response->assertRedirect('/home/create')
+                ->assertSessionHasErrors('name');
     }
 
 }
