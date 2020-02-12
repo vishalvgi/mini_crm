@@ -42,6 +42,13 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="lang/en">{{ __('En') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="lang/es">{{ __('Es') }}</a>
+                            </li>
                             @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

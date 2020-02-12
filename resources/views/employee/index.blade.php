@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{$view_data['company']['name']}} Employees</div>
+                <div class="card-header">{{$view_data['company']['name']}} {{__('message.employees')}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,19 +16,19 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8"></div>
-                            <div class="col-md-2"><a class="btn btn-secondary" href="/home">Back</a></div>
-                            <div class="col-md-2"><a class="btn btn-primary" href="employee/create">Add</a></div>
+                            <div class="col-md-2"><a class="btn btn-secondary" href="/home">{{__('message.back')}}</a></div>
+                            <div class="col-md-2"><a class="btn btn-primary" href="employee/create">{{__('message.add')}}</a></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">{{__('message.first_name')}}</th>
+                                            <th scope="col">{{__('message.last_name')}}</th>
+                                            <th scope="col">{{__('message.email')}}</th>
+                                            <th scope="col">{{__('message.phone')}}</th>
+                                            <th scope="col">{{__('message.action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,16 +42,16 @@
                                                 <form action="/company/{{$single->company_id}}/employee/{{$single->id}}" method = "post" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button  class="btn btn-link" type="submit">Delete</button>
+                                                    <button  class="btn btn-link" type="submit">{{__('message.delete')}}</button>
                                                 </form>/ &nbsp;&nbsp;
                                                 <a href="/company/{{$single->company_id}}/employee/{{$single->id}}/edit" style="">
-                                                    Edit
+                                                    {{__('message.edit')}}
                                                 </a> 
                                             </td>
                                         </tr>
                                         @endforeach
                                         @if(!count($view_data['data']))
-                                        <tr><td colspan="5" style="text-align: center">No data exist!</td></tr>
+                                        <tr><td colspan="5" style="text-align: center">{{__('message.no_data_exist')}}</td></tr>
                                         @endif
                                     </tbody>
                                 </table>

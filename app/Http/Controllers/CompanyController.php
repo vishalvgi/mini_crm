@@ -78,14 +78,14 @@ class CompanyController extends Controller {
                     $compObj->save();
                 }
             }
-            Session::flash('status', 'Successfully company saved!');
+            Session::flash('status', __('message.company_saved'));
             DB::commit();
             return Redirect::to('home');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
-            return Redirect::to('home/create')->withErrors(['status', 'Internal Error!'])
+            return Redirect::to('home/create')
                             ->withInput();
         }
     }
@@ -150,12 +150,12 @@ class CompanyController extends Controller {
                     $compObj->save();
                 }
             }
-            Session::flash('status', 'Successfully company saved!');
+            Session::flash('status', __('message.company_saved'));
             DB::commit();
             return Redirect::to('home');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
             return Redirect::to('home/' . $id . '/edit')
                             ->withInput();
@@ -176,12 +176,12 @@ class CompanyController extends Controller {
             $logo = $company->logo;
             $company = $company->delete();
             Storage::delete('storage/public/' . $logo);
-            Session::flash('status', 'Successfully company deleted!');
+            Session::flash('status', __('message.company_deleted'));
             DB::commit();
             return Redirect::to('home');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
             return Redirect::to('home');
         }

@@ -65,18 +65,21 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
+            @if (Route::has('login'))
+            <div class="top-right links">
+                <a class="nav-link" href="lang/en">{{ __('En') }}</a>
+                <a class="nav-link" href="lang/es">{{ __('Es') }}</a>
+                @auth
+                <a href="{{ url('/home') }}">{{__('message.home')}}</a>
+                @else
+                <a href="{{ route('login') }}">{{__('message.login')}}</a>
+
+                @if (Route::has('register'))
+                <a href="{{ route('register') }}">{{__('message.register')}}</a>
+                @endif
+                @endauth
+            </div>
             @endif
 
             <div class="content">

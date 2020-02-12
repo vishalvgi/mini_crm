@@ -74,8 +74,8 @@ class EmployeeController extends Controller {
                 if ($exist) {
                     DB::rollBack();
                     return Redirect::to('company/' . $company_id . '/employee/create')
-                                    ->withErrors(['first_name' => 'Employee already exist with same name',
-                                        'last_name' => 'Employee already exist with same name'])
+                                    ->withErrors(['first_name' => __('message.employee_repeated'),
+                                        'last_name' => __('message.employee_repeated')])
                                     ->withInput();
                 }
                 $empObj = new Employee();
@@ -86,14 +86,14 @@ class EmployeeController extends Controller {
                 $empObj->company_id = $company_id;
                 $empObj->save();
             }
-            Session::flash('status', 'Successfully employee saved!');
+            Session::flash('status', __('message.employee_saved'));
             DB::commit();
             return Redirect::to('company/' . $company_id . '/employee');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
-            return Redirect::to('company/' . $company_id . '/employee/create')->withErrors(['status', 'Internal Error!'])
+            return Redirect::to('company/' . $company_id . '/employee/create')
                             ->withInput();
         }
     }
@@ -152,8 +152,8 @@ class EmployeeController extends Controller {
                 if ($exist) {
                     DB::rollBack();
                     return Redirect::to('company/' . $company_id . '/employee/' . $id . '/edit')
-                                    ->withErrors(['first_name' => 'Employee already exist with same name',
-                                        'last_name' => 'Employee already exist with same name'])
+                                    ->withErrors(['first_name' => __('message.employee_repeated'),
+                                        'last_name' => __('message.employee_repeated')])
                                     ->withInput();
                 }
                 $empObj = Employee::find($id);
@@ -168,12 +168,12 @@ class EmployeeController extends Controller {
                 $empObj->phone = $request->input('phone');
                 $empObj->save();
             }
-            Session::flash('status', 'Successfully employee saved!');
+            Session::flash('status', __('message.employee_saved'));
             DB::commit();
             return Redirect::to('company/' . $company_id . '/employee');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
             return Redirect::to('company/' . $company_id . '/employee/' . $id . '/edit')
                             ->withInput();
@@ -190,12 +190,12 @@ class EmployeeController extends Controller {
         try {
             DB::beginTransaction();
             Employee::find($id)->delete();
-            Session::flash('status', 'Successfully employee deleted!');
+            Session::flash('status', __('message.employee_deleted'));
             DB::commit();
             return Redirect::to('company/' . $company_id . '/employee');
         } catch (Exception $ex) {
             Log::debug($ex);
-            Session::flash('status', 'Internal Error!');
+            Session::flash('status', __('message.internal_error'));
             DB::rollBack();
             return Redirect::to('company/' . $company_id . '/employee');
         }
