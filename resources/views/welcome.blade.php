@@ -68,8 +68,8 @@
 
             @if (Route::has('login'))
             <div class="top-right links">
-                <a class="nav-link" href="lang/en">{{ __('En') }}</a>
-                <a class="nav-link" href="lang/es">{{ __('Es') }}</a>
+                <a class="nav-link" href="/lang/en">{{ __('En') }}</a>
+                <a class="nav-link" href="/lang/es">{{ __('Es') }}</a>
                 @auth
                 <a href="{{ url('/home') }}">{{__('message.home')}}</a>
                 @else
