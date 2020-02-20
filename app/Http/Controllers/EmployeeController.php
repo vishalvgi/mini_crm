@@ -159,8 +159,8 @@ class EmployeeController extends Controller {
                 $empObj = Employee::find($id);
                 if ($empObj->company_id != $company_id) {
                     DB::rollBack();
-                    Session::flash('status', 'Invalid Employee\'s Company');
-                    return rRedirect::to('home');
+                    Session::flash('status', __('message.invalid_employee_company'));
+                    return Redirect::to('home');
                 }
                 $empObj->first_name = $request->input('first_name');
                 $empObj->last_name = $request->input('last_name');

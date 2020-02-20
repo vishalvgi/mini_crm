@@ -31,4 +31,5 @@ return [
     'update_employee' => 'actualizar empleado',
     'home' => 'Hogar',
     'register' => 'Registrarse',
+    'invalid_employee_company' => 'Perusahaan Pegawai Tidak Valid',
 ];

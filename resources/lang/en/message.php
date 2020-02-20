@@ -32,4 +32,5 @@ return [
     'update_employee' => 'Update Employee',
     'home' => 'Home',
     'register' => 'Register',
+    'invalid_employee_company' => 'Invalid Employee\'s Company',
 ];
